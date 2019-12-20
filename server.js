@@ -1,15 +1,18 @@
 
-var http= require ('http');
+const express = require('express');
+const app = express();
 
-var server= http.createServer(function (request, response) {
+const mockUserData=[
+	{name:'Mark'},
+	{name:'Jill'}
+]
 
-	 response.writeHead(200, {'Content-Type':'text/plain'});
-	 response.end('Conectado a server...\n');
+app.get('/users',function(req,res){
+	res.json({
+		success: true,
+		message: 'successfully got users. Nice!',
+		users: mockUserData
+	})
+})
 
-	
-});
-
-
-
-server.listen(8000, '127.0.0.1');
-console.log("Arranque de Servidor en 127.0.0.1:8000");
+app.listen(8000,function(){console.log('server is listening')})
